@@ -9,6 +9,5 @@ describe 'Weather API' do
     expect(response).to be_successful
 
     weather = JSON.parse(response.body)
-    require "pry"; binding.pry
   end
 end
