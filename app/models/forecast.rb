@@ -9,7 +9,8 @@ class Forecast
               :sunrise,
               :sunset,
               :next_eight_hours,
-              :next_five_days
+              :next_five_days,
+              :id
 
 
   def initialize(attributes)
@@ -24,5 +25,6 @@ class Forecast
     @sunset = attributes[:current][:sunset]
     @next_eight_hours = attributes[:hourly].take(8)
     @next_five_days = attributes[:daily].take(5)
+    @id = 1
   end
 end
