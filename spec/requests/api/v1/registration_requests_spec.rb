@@ -7,11 +7,15 @@ describe 'Users API' do
       password: "password",
       password_confirmation: "password" }
 
+    user = User.last
+    body = JSON.parse(response.body, symbolize_names: true)
     expect(response).to be_successful
     expect(response.status).to eq(201)
-
-    body = JSON.parse(response.body)
-
+    expect(body[:data][:type]).to eq("users")
+    expect(body[:data][:id]).to eq(user.id.to_s)
+    expect(body[:data][:attributes][:email]).to eq(user.email)
+    expect(body[:data][:attributes][:api_key]).to eq(user.api_key)
+    
   end
 
   it "does not register a user if the password and password confirmation do not match" do

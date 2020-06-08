@@ -26,7 +26,7 @@ class Api::V1::UsersController < ApplicationController
   def show
     user = User.find_by_email(params[:email])
     if user.authenticate(params[:password])
-      render json: UserSerializer.new(user), status: 200
+      render json: UserSerializer.new(user)
     else
       create_error = {
               "error_message" => "Credentials are bad"
