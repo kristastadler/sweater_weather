@@ -10,7 +10,6 @@ describe 'Foodie API' do
     expect(results[:data][:type]).to eq("foodie")
     expect(results[:data][:attributes][:end_location]).to eq("pueblo,co")
     expect(results[:data][:attributes][:travel_time]).to eq("1 hour 48 mins")
-    expect(results[:data][:attributes][:restaurant][:address].downcase).to include("pueblo")
 
   end
 
@@ -18,7 +17,7 @@ describe 'Foodie API' do
 
     get "/api/v1/foodie?start=sacramento,ca&end=san diego,ca&search=french"
     results = JSON.parse(response.body, symbolize_names: true)
-    
+
     expect(response).to be_successful
     expect(results[:data][:id]).to eq("null")
     expect(results[:data][:type]).to eq("foodie")

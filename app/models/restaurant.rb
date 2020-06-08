@@ -4,9 +4,7 @@ class Restaurant
 
   def initialize(attributes)
     @name = attributes[:restaurants].first[:restaurant][:name]
-    @address = [attributes[:restaurants].first[:restaurant][:location][:address],
-                attributes[:restaurants].first[:restaurant][:location][:city],
-                attributes[:restaurants].first[:restaurant][:location][:zipcode]].join(' ')
+    @address = attributes[:restaurants].first[:restaurant][:location][:address]
   end
 
 end
