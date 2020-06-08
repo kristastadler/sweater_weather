@@ -22,17 +22,15 @@ class Api::V1::FoodieController < ApplicationController
       f.headers['user_key'] = ENV['ZOMATO_API']
       f.params['lat'] = geocoordinates.latitude
       f.params['lon'] = geocoordinates.longitude
-      f.params['radius'] = 10
       f.params['cuisines'] = params[:search]
     end
     json = JSON.parse(conn2.body, symbolize_names: true)
-    restaurant_name = json[:restaurants].first[:restaurant][:name]
-    restaurant_address = json[:restaurants].first[:restaurant][:location][:address]
-    restaurant_city = json[:restaurants].first[:restaurant][:location][:city]
-    restaurant_zip = json[:restaurants].first[:restaurant][:location][:zipcode]
-    require "pry"; binding.pry
+    restaurant = Restaurant.new(json)
+
+    foodie = Foodie.new(params[:end], duration, summary, temperature, restaurant)
+  require "pry"; binding.pry
+    render json: FoodieSerializer.new(foodie)
+
   end
-
-
 
 end
