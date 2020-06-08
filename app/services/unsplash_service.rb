@@ -9,7 +9,6 @@ class UnsplashService
 
   def get_image_for_location(location)
     response = conn.get("/search/photos?query=#{location}")
-
     json = JSON.parse(response.body, symbolize_names: true)
     json[:results].first[:urls][:regular]
   end
