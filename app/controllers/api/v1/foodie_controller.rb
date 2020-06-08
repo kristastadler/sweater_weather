@@ -6,7 +6,8 @@ class Api::V1::FoodieController < ApplicationController
     forecast = OpenWeatherService.new.get_forecast(geocoordinates)
     restaurant = ZomatoService.new.find_restaurant(geocoordinates, trip_params[:cuisine])
     foodie = Foodie.new(trip_params[:destination], duration, forecast, restaurant)
-    render json: FoodieSerializer.new(foodie)
+#    options[:is_collection] = true
+    render json: FoodieSerializer.new([foodie, restaurant])
   end
 
   private
