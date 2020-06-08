@@ -12,6 +12,13 @@ class Api::V1::BackgroundsController < ApplicationController
 
     json = JSON.parse(response.body, symbolize_names: true)
     background_image_url =  json[:results].first[:urls][:regular]
-    require "pry"; binding.pry
+    
+
+    data = {
+            "data" => {
+              "image_url" => background_image_url
+              }
+            }
+    render json: data
   end
 end
