@@ -28,7 +28,6 @@ class Api::V1::FoodieController < ApplicationController
     restaurant = Restaurant.new(json)
 
     foodie = Foodie.new(params[:end], duration, summary, temperature, restaurant)
-  require "pry"; binding.pry
     render json: FoodieSerializer.new(foodie)
 
   end
