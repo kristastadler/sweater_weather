@@ -10,6 +10,7 @@ describe 'Foodie API' do
     expect(results[:data][:id]).to eq("null")
     expect(results[:data][:type]).to eq("foodie")
     expect(results[:data][:attributes][:end_location]).to eq("pueblo,co")
+    expect(results[:data][:attributes][:travel_time]).to eq("1 hour 48 mins")
     expect(results[:data][:attributes][:restaurant][:address].downcase).to include("pueblo")
 
   end
