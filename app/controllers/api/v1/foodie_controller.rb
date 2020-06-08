@@ -2,13 +2,16 @@ class Api::V1::FoodieController < ApplicationController
 
   def index
     #Duration of trip
-    conn = Faraday.get("https://maps.googleapis.com/maps/api/directions/json") do |f|
-      f.params['origin'] = params[:start]
-      f.params['destination'] = params[:end]
-      f.params['key'] = ENV['GOOGLE_API_KEY']
-    end
-    json = JSON.parse(conn.body, symbolize_names: true)
-    duration = json[:routes].first[:legs].first[:duration][:text]
+    start = params[:start]
+    destination = params[:end]
+    GoogleMapsService.new.get_trip_length(start, destination)
+    # conn = Faraday.get("https://maps.googleapis.com/maps/api/directions/json") do |f|
+    #   f.params['origin'] = start
+    #   f.params['destination'] = destination
+    #   f.params['key'] = ENV['GOOGLE_API_KEY']
+    # end
+    # json = JSON.parse(conn.body, symbolize_names: true)
+    # duration = json[:routes].first[:legs].first[:duration][:text]
 
     #Forecast at location
     end_location = params[:end]
