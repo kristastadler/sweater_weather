@@ -15,8 +15,24 @@ class Api::V1::FoodieController < ApplicationController
     geocoordinates = GoogleGeocoderService.new.get_coordinates(end_location)
     forecast = OpenWeatherService.new.get_forecast(geocoordinates)
     summary = forecast.current_description
-    temperature = forecast.current_temp 
+    temperature = forecast.current_temp
+
+    #Restaurant at location
+    conn2 = Faraday.get("https://developers.zomato.com/api/v2.1/search") do |f|
+      f.headers['user_key'] = ENV['ZOMATO_API']
+      f.params['lat'] = geocoordinates.latitude
+      f.params['lon'] = geocoordinates.longitude
+      f.params['radius'] = 10
+      f.params['cuisines'] = params[:search]
+    end
+    json = JSON.parse(conn2.body, symbolize_names: true)
+    restaurant_name = json[:restaurants].first[:restaurant][:name]
+    restaurant_address = json[:restaurants].first[:restaurant][:location][:address]
+    restaurant_city = json[:restaurants].first[:restaurant][:location][:city]
+    restaurant_zip = json[:restaurants].first[:restaurant][:location][:zipcode]
     require "pry"; binding.pry
   end
+
+
 
 end
