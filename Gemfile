@@ -52,6 +52,8 @@ group :development, :test do
   gem 'figaro'
   gem 'simplecov'
   gem 'launchy'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 group :development do
@@ -62,6 +64,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

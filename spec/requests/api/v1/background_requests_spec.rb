@@ -2,12 +2,13 @@ require 'rails_helper'
 
 describe 'Backgrounds API' do
   it "retrieves background image for a city" do
-#After exam, go back and add VCR for testing purposes
+    VCR.use_cassette('background_image_for_city') do
 
-    get "/api/v1/backgrounds?location=denver,co"
+      get "/api/v1/backgrounds?location=denver,co"
 
-    expect(response).to be_successful
+      expect(response).to be_successful
 
-    background_url = JSON.parse(response.body)
+      background_url = JSON.parse(response.body)
+    end
   end
 end
