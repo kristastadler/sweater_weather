@@ -3,9 +3,12 @@ class Api::V1::UsersController < ApplicationController
   require 'securerandom'
 
   def create
+    body = request.body.as_json
+    @parsed = JSON.parse(body.first, symbolize_names: true)
+
     if confirm_password?
-      user = User.new(email: params[:email],
-                   password: params[:password],
+      user = User.new(email: @parsed[:email],
+                   password: @parsed[:password],
                    api_key: SecureRandom.urlsafe_base64 )
       if user.save
         render json: UserSerializer.new(user), status: :created
@@ -24,8 +27,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by_email(params[:email])
-    if user.authenticate(params[:password])
+    body = request.body.as_json
+    @parsed = JSON.parse(body.first, symbolize_names: true)
+
+    user = User.find_by_email(@parsed[:email])
+    if user.authenticate(@parsed[:password])
       render json: UserSerializer.new(user)
     else
       create_error = {
@@ -38,6 +44,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def confirm_password?
-    params[:password] == params[:password_confirmation]
+    @parsed[:password] == @parsed[:password_confirmation]
   end
 end
