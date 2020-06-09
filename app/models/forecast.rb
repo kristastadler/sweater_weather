@@ -12,10 +12,12 @@ class Forecast
               :next_eight_hours,
               :next_five_days,
               :daily_forecast,
-              :id
+              :id,
+              :city,
+              :date_time
 
 
-  def initialize(attributes)
+  def initialize(attributes, location)
     @current_temp = (attributes[:current][:temp] / 0.55555556 - 459.67).round(0)
     @high_temp = (attributes[:daily].first[:temp][:max] / 0.55555556 - 459.67).round(0)
     @low_temp = (attributes[:daily].first[:temp][:min] / 0.55555556 - 459.67).round(0)
@@ -28,6 +30,9 @@ class Forecast
     @next_eight_hours = attributes[:hourly].take(8)
     @next_five_days = attributes[:daily].take(5)
     @id = 1
+    @city = location
+    @date_time = DateTime.strptime(attributes[:current][:dt].to_s, '%s')
+
   end
 
   def hourly_forecast

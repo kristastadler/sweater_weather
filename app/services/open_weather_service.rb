@@ -1,6 +1,6 @@
 class OpenWeatherService
 
-  def get_forecast(geocoordinates)
+  def get_forecast(geocoordinates, location)
     conn = Faraday.get("https://api.openweathermap.org/data/2.5/onecall") do |f|
       f.params['lat'] = geocoordinates.latitude
       f.params['lon'] = geocoordinates.longitude
@@ -8,7 +8,7 @@ class OpenWeatherService
       f.params['appid'] = ENV['OPEN_WEATHER_KEY']
     end
     json = JSON.parse(conn.body, symbolize_names: true)
-    forecast = Forecast.new(json)
-  end 
+    forecast = Forecast.new(json, location)
+  end
 
 end

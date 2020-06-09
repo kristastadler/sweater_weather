@@ -6,7 +6,7 @@ class Api::V1::RoadTripController < ApplicationController
     if find_user != nil
       duration = GoogleMapsService.new.get_trip_length(road_trip_params)
       geocoordinates = GoogleGeocoderService.new.get_coordinates(road_trip_params[:destination])
-      forecast = OpenWeatherService.new.get_forecast(geocoordinates)
+      forecast = OpenWeatherService.new.get_forecast(geocoordinates, road_trip_params[:destination])
       roadtrip = RoadTrip.new(road_trip_params, duration, forecast)
       render json: RoadTripSerializer.new(roadtrip)
 

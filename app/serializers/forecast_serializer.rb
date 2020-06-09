@@ -1,6 +1,8 @@
 class ForecastSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :current_temp,
+  attributes :city,
+             :date_time,
+             :current_temp,
              :high_temp,
              :low_temp,
              :current_description,
