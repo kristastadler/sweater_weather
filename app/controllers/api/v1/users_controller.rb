@@ -4,7 +4,8 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    @parsed = JSON.parse(request.body.first, symbolize_names: true)
+    @parsed = JSON.parse(request.body.reduce, symbolize_names: true)
+
     if confirm_password?
       user = User.new(email: @parsed[:email],
                    password: @parsed[:password],
@@ -26,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @parsed = JSON.parse(request.body.first, symbolize_names: true)
+    @parsed = JSON.parse(request.body.reduce, symbolize_names: true)
     user = User.find_by_email(@parsed[:email])
     if user.authenticate(@parsed[:password])
       render json: UserSerializer.new(user)

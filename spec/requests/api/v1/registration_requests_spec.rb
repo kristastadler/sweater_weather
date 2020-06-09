@@ -7,7 +7,7 @@ describe 'Users API' do
       "password" => "password",
       "password_confirmation" => "password" }
 
-    post '/api/v1/users', params: registration_info, as: :json
+    post '/api/v1/users', params: registration_info.to_json
 
     user = User.last
     body = JSON.parse(response.body, symbolize_names: true)
