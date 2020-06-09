@@ -8,7 +8,8 @@ describe 'Backgrounds API' do
 
       expect(response).to be_successful
 
-      background_url = JSON.parse(response.body)
+      background_url = JSON.parse(response.body, symbolize_names: true)
+      expect(background_url[:data][:image_url]).to_not eq("nil")
     end
   end
 end
