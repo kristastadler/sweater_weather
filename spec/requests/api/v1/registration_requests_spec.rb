@@ -55,8 +55,8 @@ describe 'Users API' do
                       api_key: "q1tQHkkMyKpfYPqWD7-2cQ4",
                       password: "password")
 
-    post '/api/v1/sessions', params: { email: "whatever@example.com",
-                                      password: "password" }, as: :json
+    post '/api/v1/sessions', params: { "email" => "whatever@example.com",
+                                      "password" => "password" }, as: :json
 
     body = JSON.parse(response.body, symbolize_names: true)
     expect(response).to be_successful
@@ -67,7 +67,7 @@ describe 'Users API' do
     expect(body[:data][:attributes][:api_key]).to eq(user.api_key)
   end
 
-  xit "returns an error when incorrect user information is received" do
+  it "returns an error when incorrect user information is received" do
     user = User.create(email: "whatever@example.com",
                       api_key: "q1tQHkkMyKpfYPqWD7-2cQ4",
                       password: "better_password")
