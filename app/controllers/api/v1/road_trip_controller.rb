@@ -1,7 +1,7 @@
 class Api::V1::RoadTripController < ApplicationController
 
   def show
-    if find_user =! nil
+    if find_user != nil
       duration = GoogleMapsService.new.get_trip_length(road_trip_params)
       geocoordinates = GoogleGeocoderService.new.get_coordinates(road_trip_params[:destination])
       forecast = OpenWeatherService.new.get_forecast(geocoordinates)
