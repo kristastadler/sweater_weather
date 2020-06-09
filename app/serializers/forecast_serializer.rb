@@ -9,6 +9,6 @@ class ForecastSerializer
              :uvi,
              :sunrise,
              :sunset,
-             :next_eight_hours,
-             :next_five_days
+             :hourly_forecast,
+             :daily_forecast
 end

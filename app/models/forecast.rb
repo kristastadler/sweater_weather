@@ -8,8 +8,10 @@ class Forecast
               :uvi,
               :sunrise,
               :sunset,
+              :hourly_forecast,
               :next_eight_hours,
               :next_five_days,
+              :daily_forecast,
               :id
 
 
@@ -27,4 +29,28 @@ class Forecast
     @next_five_days = attributes[:daily].take(5)
     @id = 1
   end
+
+  def hourly_forecast
+    hourly_forecast = []
+    next_eight_hours.each do |hour|
+      hourly_forecast << { date_time: DateTime.strptime(hour[:dt].to_s, '%s'),
+                          description: hour[:weather].first[:main],
+                          temperature: (hour[:temp] / 0.55555556 - 459.67).round(0) }
+
+    end
+    hourly_forecast
+  end
+
+  def daily_forecast
+    daily_forecast = []
+    next_five_days.each do |day|
+      daily_forecast << { date: Date.strptime(day[:dt].to_s, '%s'),
+                          description: day[:weather].first[:main],
+                          rain_accumulation: day[:rain],
+                          high_temp: (day[:temp][:max] / 0.55555556 - 459.67).round(0),
+                          low_temp: (day[:temp][:min] / 0.55555556 - 459.67).round(0) }
+    end
+    daily_forecast
+  end
+
 end
