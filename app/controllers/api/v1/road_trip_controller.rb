@@ -1,6 +1,8 @@
 class Api::V1::RoadTripController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def show
+    @parsed = JSON.parse(request.body.reduce, symbolize_names: true)
     if find_user != nil
       duration = GoogleMapsService.new.get_trip_length(road_trip_params)
       geocoordinates = GoogleGeocoderService.new.get_coordinates(road_trip_params[:destination])
@@ -19,12 +21,12 @@ class Api::V1::RoadTripController < ApplicationController
   private
 
   def find_user
-    User.find_by_api_key(params[:api_key])
+    User.find_by_api_key(@parsed[:api_key])
   end
 
   def road_trip_params
-    { start: params[:origin],
-      destination: params[:destination] }
+    { start: @parsed[:origin],
+      destination: @parsed[:destination] }
   end
 
 end

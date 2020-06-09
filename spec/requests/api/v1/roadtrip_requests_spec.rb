@@ -9,7 +9,7 @@ describe 'Roadtrip API' do
 
       post '/api/v1/road_trip', params: { origin: "Denver, CO",
         destination: "Pueblo, CO",
-        api_key: user.api_key }
+        api_key: user.api_key }.to_json
 
       results = JSON.parse(response.body, symbolize_names: true)
 
@@ -30,7 +30,7 @@ describe 'Roadtrip API' do
 
     post '/api/v1/road_trip', params: { origin: "Denver, CO",
       destination: "Pueblo, CO",
-      api_key: "q1tQHklMyKpfYRqWD7-2cQ4" }
+      api_key: "q1tQHklMyKpfYRqWD7-2cQ4" }.to_json
 
     results = JSON.parse(response.body, symbolize_names: true)
 
