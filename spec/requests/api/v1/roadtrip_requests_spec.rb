@@ -8,7 +8,7 @@ describe 'Roadtrip API' do
 
     post '/api/v1/road_trip', params: { origin: "Denver, CO",
       destination: "Pueblo, CO",
-      api_key: user.api_key }
+      api_key: "q1tQHklMyKpfYPqWD7-2cQ4" }
 
     results = JSON.parse(response.body, symbolize_names: true)
 
@@ -17,7 +17,7 @@ describe 'Roadtrip API' do
     expect(results[:data][:attributes][:origin]).to eq("Denver, CO")
     expect(results[:data][:attributes][:destination]).to eq("Pueblo, CO")
     expect(results[:data][:attributes][:travel_time]).to eq("1 hour 48 mins")
-    expect(results[:data][:attributes][:forecast][:description]).to_not eq("nil")
-    expect(results[:data][:attributes][:forecast][:temperature]).to_not eq("nil")
+    expect(results[:data][:attributes][:destination_forecast][:summary]).to_not eq("nil")
+    expect(results[:data][:attributes][:destination_forecast][:temperature]).to_not eq("nil")
   end
 end
