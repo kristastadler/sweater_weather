@@ -29,7 +29,7 @@ class Forecast
     @sunset = attributes[:current][:sunset]
     @next_eight_hours = attributes[:hourly].take(8)
     @next_five_days = attributes[:daily].take(5)
-    @id = 1
+    @id = "null"
     @city = location
     @date_time = DateTime.strptime(attributes[:current][:dt].to_s, '%s')
 
