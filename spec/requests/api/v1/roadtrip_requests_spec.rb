@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Roadtrip API' do
-  it "retrieves travel time and arrival forecast for a road trip" do
+  xit "retrieves travel time and arrival forecast for a road trip" do
     VCR.use_cassette('road_trip') do
       user = User.create(email: "whatever@example.com",
                         api_key: "q1tQHkkMyKpfYPqWD7-2cQ4",

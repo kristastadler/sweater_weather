@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Foodie API' do
-  it "retrieves food and forecast information for a destination city" do
+  xit "retrieves food and forecast information for a destination city" do
     VCR.use_cassette('foodie_request') do
 
       get "/api/v1/foodie?start=denver,co&end=pueblo,co&search=italian"
