@@ -8,6 +8,9 @@ dist: xenial
 before_install:
   - yes | gem update --system --force
   - gem install bundler
+script:
+- bundle exec rails db:{create,migrate}
+- bundle exec rspec
 deploy:
   provider: heroku
   api_key:
