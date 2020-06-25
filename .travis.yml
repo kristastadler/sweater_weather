@@ -11,8 +11,8 @@ before_install:
 script:
 - bundle exec rails db:{create,migrate}
 - bundle exec rspec
-deploy:
-  provider: heroku
-  api_key:
-  app:
-  run: rails db:migrate
+# deploy:
+#   provider: heroku
+#   api_key:
+#   app:
+#   run: rails db:migrate
