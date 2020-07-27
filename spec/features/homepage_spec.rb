@@ -4,6 +4,6 @@ require 'rails_helper'
     it "displays information about the Whether Sweater Weather API" do
 
         visit "/"
-        expect(page).to have_content("This is the Whether Sweater Weather API")
+        expect(page).to have_content("Welcome to the Whether Sweater Weather API Service")
     end
   end
