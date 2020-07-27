@@ -1,65 +1,142 @@
-# Monster Shop Group Project
+# Whether Sweater Weather?
 
-The Monster Shop project is an interactive shopping website that allows a users to do different things, depending on their roles:
-* Default Users can view and order items. Once items have been ordered, they can view those orders and their statuses and/or cancel orders, depending on each order's status.
-* Merchant Employee Users can view and update inventory for their shop and manage orders for their items.
-* Admin Users can view and manage default users, merchant employee users, and all items and orders.
+### Overview
 
-## How to Clone Project to Local Machine
-Use the instructions below in combination with your terminal in order to learn more about this project:
+A backend Rails application designed to support a fictional weather information application.
 
-  1. Clone this repository:
-    ```git@github.com:kmcgrevey/monster_shop_2001.git```
+### Author
 
-  2. Install the necessary gems:
-    ```bundle install``` &
-    ```bundle update```
+- [Krista Stadler](https://github.com/kristastadler)
 
-  3. Initialize the database:
-    ```rails db:{create,migrate,seed}```
+### Local Setup
 
-  4. Make a connection with the Rails server:
-    ```rails s```
+ - Clone
+ - bundle
+ - rails db:{create,migrate,seed}
+ - rails s
+ - All endpoints are available at: `https://whether-sweater-weather.herokuapp.com/`
 
-  5. Visit your browser, and enter the following into the search bar:
-  ```localhost:3000```
+ ### Production
 
-  6. Enjoy!
+- The production version of this API is deployed to [https://whether-sweater-weather.herokuapp.com/](https://whether-sweater-weather.herokuapp.com/)
 
-## Skills Gained from this Project
+### Endpoints
 
-### Rails
-* Create routes for namespaced routes
-* Implement partials to break a page into reusable components
-* Use Sessions to store information about a user and implement login/logout functionality
-* Use filters (e.g. `before_action`) in a Rails controller
-* Limit functionality to authorized users
-* Use BCrypt to hash user passwords before storing in the database
+  - `api/v1/backgrounds`
+    - Description: Get request to return an image of a requested city.
+    - Location param is required
+    - Example Request Params:
+      ``location=San Diego, CA``
+    - Expected Request Type: JSON
+    - Example Response:
+      ``{
+    "data": {
+        "image_url": "https://images.unsplash.com/photo-1534729607933-5904a7f99ff9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE0MDYxMn0"
+    }
+}``
 
-### ActiveRecord
-* Use built-in ActiveRecord methods to join multiple tables of data, calculate statistics and build collections of data grouped by one or more attributes
-
-### Databases
-* Design and diagram a Database Schema
-* Write raw SQL queries (as a debugging tool for AR)
-
-### Testing and Debugging
-* Write feature tests utilizing:
-  - RSpec and Capybara
-  - CSS selectors to target specific areas of a page
-  - Use Pry in Rails files to get more information about an error
-  - Use `save_and_open_page` to view the HTML generated when visiting a path in a feature test
-  - Utilize the Rails console as a tool to get more information about the current state of a development database
-  - Use `rails routes` to get additional information about the routes that exist in a Rails application
-
-### Visual Representation of the Schema
-![schema visual](https://raw.githubusercontent.com/kmcgrevey/monster_shop_2001/master/app/assets/images/Screen%20Shot%202020-04-16%20at%2010.45.07%20AM.png)
-
-## Link to Application in Production
-* https://jkkm-monster-shop.herokuapp.com/
-
-## Links to Contributor Github Profiles
-* Josh Tukman: https://github.com/Joshua-Tukman
-* Kevin McGrevey: https://github.com/kmcgrevey
-* Krista Stadler:  https://github.com/kristastadler
-* Mike Hernandez: https://github.com/mikez321
+  - `api/v1/forecast`
+    - Description: Get request to return full forecast information for a requested city.
+    - Location param is required
+    - Example Request Params:
+      ``location=San Diego, CA``
+    - Expected Request Type: JSON
+    - Example Response:
+    ``{
+    "data": {
+        "id": "null",
+        "type": "forecast",
+        "attributes": {
+            "city": "Denver, CO",
+            "date_time": "2020-07-27T22:08:42.000+00:00",
+            "current_temp": 85,
+            "high_temp": 85,
+            "low_temp": 76,
+            "current_description": "Clouds",
+            "feels_like": 85,
+            "humidity": 36,
+            "uvi": 11.59,
+            "sunrise": 1595850892,
+            "sunset": 1595902669,
+            "hourly_forecast": [
+                {
+                    "date_time": "2020-07-27T22:00:00.000+00:00",
+                    "description": "Clouds",
+                    "temperature": 85
+                },
+                {
+                    "date_time": "2020-07-27T23:00:00.000+00:00",
+                    "description": "Clouds",
+                    "temperature": 86
+                },
+                {
+                    "date_time": "2020-07-28T00:00:00.000+00:00",
+                    "description": "Clouds",
+                    "temperature": 85
+                },
+                {
+                    "date_time": "2020-07-28T01:00:00.000+00:00",
+                    "description": "Clouds",
+                    "temperature": 83
+                },
+                {
+                    "date_time": "2020-07-28T02:00:00.000+00:00",
+                    "description": "Clouds",
+                    "temperature": 81
+                },
+                {
+                    "date_time": "2020-07-28T03:00:00.000+00:00",
+                    "description": "Clouds",
+                    "temperature": 79
+                },
+                {
+                    "date_time": "2020-07-28T04:00:00.000+00:00",
+                    "description": "Clouds",
+                    "temperature": 77
+                },
+                {
+                    "date_time": "2020-07-28T05:00:00.000+00:00",
+                    "description": "Clouds",
+                    "temperature": 76
+                }
+            ],
+            "daily_forecast": [
+                {
+                    "date": "2020-07-27",
+                    "description": "Clouds",
+                    "rain_accumulation": null,
+                    "high_temp": 85,
+                    "low_temp": 76
+                },
+                {
+                    "date": "2020-07-28",
+                    "description": "Rain",
+                    "rain_accumulation": 3.82,
+                    "high_temp": 85,
+                    "low_temp": 70
+                },
+                {
+                    "date": "2020-07-29",
+                    "description": "Rain",
+                    "rain_accumulation": 0.62,
+                    "high_temp": 94,
+                    "low_temp": 70
+                },
+                {
+                    "date": "2020-07-30",
+                    "description": "Rain",
+                    "rain_accumulation": 0.87,
+                    "high_temp": 72,
+                    "low_temp": 66
+                },
+                {
+                    "date": "2020-07-31",
+                    "description": "Clear",
+                    "rain_accumulation": null,
+                    "high_temp": 86,
+                    "low_temp": 66
+                }
+            ]
+        }
+    }
+}``
