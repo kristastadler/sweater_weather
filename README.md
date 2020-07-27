@@ -33,7 +33,7 @@ A backend Rails application designed to support a fictional weather information 
     "data": {
         "image_url": "https://images.unsplash.com/photo-1534729607933-5904a7f99ff9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE0MDYxMn0"
     }
-    }```
+    }``
 
   - ``api/v1/forecast``
     - Description: Get request to return full forecast information for a requested city.
@@ -139,4 +139,4 @@ A backend Rails application designed to support a fictional weather information 
             ]
         }
     }
-}```
+}``
