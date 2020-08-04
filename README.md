@@ -14,7 +14,7 @@ A backend Rails application designed to support a fictional weather information 
  - bundle
  - rails db:{create,migrate,seed}
  - rails s
- - All endpoints are available at: `http://localhost:3000/api/v1/`
+ - All endpoints are available at: `https://whether-sweater-weather.herokuapp.com/`
 
 
 ### Endpoints
