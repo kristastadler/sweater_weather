@@ -16,26 +16,23 @@ A backend Rails application designed to support a fictional weather information 
  - rails s
  - All endpoints are available at: `https://whether-sweater-weather.herokuapp.com/`
 
- ### Production
-
-- The production version of this API is deployed to [https://whether-sweater-weather.herokuapp.com/](https://whether-sweater-weather.herokuapp.com/)
 
 ### Endpoints
 
-  - `api/v1/backgrounds`
+  - ``backgrounds``
     - Description: Get request to return an image of a requested city.
     - Location param is required
     - Example Request Params:
       ``location=San Diego, CA``
     - Expected Request Type: JSON
     - Example Response:
-    `` {
+    ``` {
     "data": {
         "image_url": "https://images.unsplash.com/photo-1534729607933-5904a7f99ff9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjE0MDYxMn0"
     }
-    }``
+    }```
 
-  - `api/v1/forecast`
+  - ``forecast``
     - Description: Get request to return full forecast information for a requested city.
     - Location param is required
     - Example Request Params:
@@ -140,3 +137,58 @@ A backend Rails application designed to support a fictional weather information 
         }
     }
 }```
+
+  - ``users``
+    - Description: Post request to create new user and assign them an API key.
+    - Example Request Body:
+      ``{ "email": "brandnew@example.com", "password": "password", "password_confirmation": "password" }``
+    - Expected Request Type: JSON
+    - Example Response:
+    ``` {
+    "data": {
+        "id": "6",
+        "type": "users",
+        "attributes": {
+            "email": "brandnew@example.com",
+            "api_key": "FQxAi9dI-4KS21rfH27Q9A"
+        }
+    }```
+
+  - ``sessions``
+    - Description: Post request to log an existing user in to the system.
+    - Example Request Body:
+      ``{ "email": "whatever@example.com", "password": "password" }``
+    - Expected Request Type: JSON
+    - Example Response:
+    ```{
+      "data": {
+          "id": "1",
+          "type": "users",
+          "attributes": {
+              "email": "whatever@example.com",
+              "api_key": "yV2dxgdKiDZDf8d6uH9sQA"
+          }
+      }
+      }```
+
+  - ``road_trip``
+    - Description: Post request for user to get travel time and forecast information for a requested trip. Requires a user to have an assigned API key.
+    - Example Request Body:
+      ``{ "origin": "Denver,CO", "destination": "Pueblo,CO", "api_key": "yV2dxgdKiDZDf8d6uH9sQA" }``
+    - Expected Request Type: JSON
+    - Example Response:
+    ```{
+    "data": {
+        "id": "null",
+        "type": "road_trip",
+        "attributes": {
+            "origin": "Denver,CO",
+            "destination": "Pueblo,CO",
+            "travel_time": "1 hour 47 mins",
+            "destination_forecast": {
+                "summary": "Clear",
+                "temperature": 76
+            }
+        }
+    }
+}```    
